@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>《{$obj.vod_name}》在线观看-{$obj.type.type_name}-{$maccms.site_name}</title>
+<meta name="keywords" content="{$obj.vod_name}免费观看,{$obj.type.type_name}{$obj.vod_name}剧情介绍,{$maccms.site_name}">
+<meta name="description" content="{$obj.vod_name} {$obj.vod_name}在线看；{$obj.vod_name}剧情：{$obj.vod_blurb|mac_substring=50}">
+{include file="block/include"}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+  <div class="row">
+    <style>
+.my-blur {
+  -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+    position: absolute;
+    overflow:auto; 
+    width: 100%;
+    height:193px;
+}
+
+@media screen and (max-width:500px) { 
+  .info-style-custom, .info-style-custom h1, .info-style-custom a, .info-style-custom li span  {
+      color: #FFF!important;
+      text-shadow: 1px 1px 2px #333;
+      font-size:13px;
+  }
+  .info-style-custom h1 {
+        font-size: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+}
+</style>
+    <br>
+    <div class=" layout-box clearfix p-0 mt-0">
+      <div style="background: url({$obj.vod_pic|mac_url_img}) no-repeat center center;background-size:cover;" class="my-blur visible-xs"></div>
+      <div class="col-md-9 col-sm-12 col-xs-12">
+        <div class="col-md-3 col-sm-3 col-xs-4 clearfix">
+          <div class="details-pic"> <a class="video-pic" href="{:mac_url_vod_play($obj,['sid'=>1,'nid'=>1])}" title="{$obj.vod_name}" style="background: url({$obj.vod_pic|mac_url_img}) no-repeat top center;background-size:cover;"></a>
+          </div>
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-8 clearfix p-0 info-style-custom">
+          <div class="details-info p-0" id="zanpian-score">
+            <h1 class="text-overflow">{$obj.vod_name} </h1>
+            <ul class="info clearfix">
+              <li class="col-md-12 text hidden-xs"> </li>
+              <li class="col-md-6 col-sm-6 col-xs-12 text hidden-xs"> <span>状态：</span>{if condition="($obj.type.type_id == 1) || ($obj.type_id_1 == 1) "}{$obj.vod_remarks|default='高清'}{else/}{notempty name="vo.vod_remarks"}{$obj.vod_remarks}{elseif condition="!empty($obj.vod_serial)"/}更新至第{$obj.vod_serial}集{else/}全集{/notempty}{/if} </li>
+              <li class="col-md-6 col-sm-6 col-xs-6 text hidden-xs"><span>类别：<a href="{$obj.type|mac_url_type}">{$obj.type.type_name}</a></span></li>
+              <li class="col-md-12 text"><span class="hidden-xs">主演：</span>{$obj.vod_actor|mac_url_create='actor','vod','search','&nbsp;'}</li>
+              <li class="col-xs-12 text hidden-sm hidden-md hidden-lg"><span class="hidden-xs">年代：</span><a href="{$obj.type|mac_url_type}">{$obj.type.type_name}</a> / {$obj.vod_year} / {$obj.vod_director|mac_url_create='director','vod','search','&nbsp;'}</li>
+              <li class="col-md-6 col-sm-6 col-xs-12 text hidden-xs"><span>导演：</span>{$obj.vod_director|mac_url_create='director','vod','search','&nbsp;'}</li>
+              <li class="col-md-6 col-sm-6 col-xs-4 text hidden-xs"><span>国家/地区：</span>{$obj.vod_area|default="未录入"}</li>
+              <li class="col-md-6 col-sm-6 col-xs-12  text visible-xs"> <span>状态：{if condition="($obj.type.type_id == 1) || ($obj.type_id_1 == 1) "}{$obj.vod_remarks|default='高清'}{else/}{notempty name="vo.vod_remarks"}{$obj.vod_remarks}{elseif condition="!empty($obj.vod_serial)"/}更新至第{$obj.vod_serial}集{else/}全集{/notempty}{/if}</span> </li>
+              <li class="col-md-6 col-sm-6 col-xs-6 text hidden-xs"><span>语言/字幕：</span>{$obj.vod_lang|default="未录入"}</li>
+              <li class="col-md-6 col-sm-6 col-xs-6 text hidden-xs"> <span>年代：</span>{$obj.vod_year|default="未录入"} </li>
+              <li class="col-md-6 col-sm-6 col-xs-12 text hidden-xs"><span>更新时间：</span>{$obj.vod_time|mac_day}</li>
+							<li class="col-md-12 col-sm-12 col-xs-12 text hidden-xs"><span>剧情简介：</span>{$obj.vod_content|mac_filter_html|mac_substring=100}...<a href="#zanpian-cm">详细</a></li>
+              <br>
+              <span class="details-content-default">
+              <div class="addthis_inline_share_toolbox_lz5f" style="padding-top: 25px;"></div>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-3 col-xs-3 hidden-sm hidden-xs">
+        <div style="padding-bottom:0px;"></div>
+        <div class="clearfix" id="myTab">
+          <ul class="box-star-list">
+          </ul>
+        </div>
+        <div class="clearfix star-video-list"> </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8-fix col-sm-12 box-main-content" style="position:static">
+      <div class="g2_pc_detail_top" style="margin-top:15px;"></div>
+      <div class="details-play-title">
+        <ul class="nav nav-tabs hidden-xs" id="playTab">
+					{if count($obj.vod_play_list) gt 5}
+					{maccms:foreach name="obj.vod_play_list" id="vo"}
+					{if $key lt 6}
+          <li class="hidden-xs {if $key==1} active{/if}"><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" data-toggle="tab">{$vo.player_info.show}</a></li>
+					{/if}
+					{/maccms:foreach}
+          <li class="dropdown player-more"> <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+							{maccms:foreach name="obj.vod_play_list" id="vo"}
+							{if $key gt 5}
+              <li><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" tabindex="-1" data-toggle="tab">{$vo.player_info.show}</a></li>
+							{/if}
+							{/maccms:foreach}
+            </ul>
+          </li>
+					{else/}
+					{maccms:foreach name="obj.vod_play_list" id="vo"}
+          <li class="hidden-xs {if $key==1} active{/if}"><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" data-toggle="tab">{$vo.player_info.show}</a></li>
+					{/maccms:foreach}
+					{/if}
+          <div class="play-bug"><a rel="nofollow" href="{:mac_url('gbook/index')}"><i class="iconfont">&#xe635;</i>报错</a></div>
+        </ul>
+      </div>
+      <div class="layout-box clearfix m-0 hidden-xs">
+        <div class="playlist">
+					{maccms:foreach name="obj.vod_play_list" id="vo"}
+          <ul class="clearfix fade {if $key==1} in active{/if}" id="con_playlist_{$key}">
+						{maccms:foreach name="vo.urls" id="vo2"}
+            <li><a href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+						{/maccms:foreach}
+          </ul>
+					{/maccms:foreach}
+        </div>
+      </div>
+			{maccms:foreach name="obj.vod_play_list" id="vo"}
+      <div class="playlist-mobile playlist layout-box clearfix hidden-sm hidden-md hidden-lg"> <i class="gico {$vo.player_info.from}" style="display:inline-block;width:15px;height:20px;background-position: 0px 3px;"></i> <span style="font-weight:700;">{$vo.player_info.show}</span>
+        <ul class="clearfix fade in active" id="con_playlist_{$key}">
+					{maccms:foreach name="vo.urls" id="vo2"}
+          <li><a href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+					{/maccms:foreach}
+        </ul>
+      </div>
+			{/maccms:foreach}
+      <div class="g2_pc_detail_top" style="margin-top:15px;"></div>
+      <div class="layout-box clearfix" id="zanpian-cm" data-type="zanpian">
+        <div class="box-title hidden-xs">
+          <h3 class="m-0">剧情介绍</h3>
+        </div>
+        <div class="box-comment"> <span class="details-content-all">{$obj.vod_content}</span> </div>
+      </div>
+      <div class="layout-box clearfix">
+        <div class="box-title">
+          <h3 class="m-0">热播{$obj.type.type_name}</h3>
+        </div>
+        <div class="swiper-container vod-swiper-5">
+          <ul class="swiper-wrapper">
+						{maccms:vod num="15" not="'.$obj['vod_id'].'" type="current" by="hits_week" order="desc"}
+            {include file="block/item_slide"}
+						{/maccms:vod}
+          </ul>
+          <div class="swiper-button-next hidden-xs"><i class="icon iconfont icon-right"></i></div>
+          <div class="swiper-button-prev hidden-xs"><i class="icon iconfont icon-left"></i></div>
+        </div>
+      </div>
+      <div class="layout-box clearfix">
+        <div class="box-title">
+          <h3 class="m-0">热门推荐</h3>
+        </div>
+        <div class="swiper-container vod-swiper-5">
+          <ul class="swiper-wrapper">
+            {maccms:vod num="15" not="'.$obj['vod_id'].'" by="hits" order="desc"}
+            {include file="block/item_slide"}
+						{/maccms:vod}
+          </ul>
+          <div class="swiper-button-next hidden-xs"><i class="icon iconfont icon-right"></i></div>
+          <div class="swiper-button-prev hidden-xs"><i class="icon iconfont icon-left"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 col-sm-12 box-main-side hidden-sm hidden-xs">
+      <div class="layout-box clearfix">
+        <div class="box-title " style="padding:0px 0px 10px 0">
+          <h3 class="m-0"><i class="icon iconfont text-color">&#xe66e;</i>{$obj.type.type_name}排行榜</h3>
+        </div>
+        <div class="box-video-text-list">
+					{maccms:vod num="1" type="current" by="hits" order="desc"}
+          <div class="col-md-6 col-sm-12 col-xs-12 p-0"> <a class="video-pic" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}" style="background: url({$vo.vod_pic|mac_url_img}) no-repeat top center;background-size:cover;"><span class="note text-bg-r">{include file="block/status"}</span><span class="num">{$key}</span></a> </div>
+          <div class="col-md-6 col-sm-12 col-xs-12" style=" padding-top:0px; padding-right:0px;">
+            <div class="col-md-12 p-0 text-overflow"> <strong>{$vo.vod_name}</strong> </div>
+            <div class="col-md-12 pg-0 text-overflow"> </div>
+            <div class="col-md-12 p-0 text-overflow"> {$vo.vod_actor} </div>
+            <div class="col-md-12 p-0 text-overflow"> {include file="block/status"} </div>
+            <div class="col-md-12 pg-0 text-overflow"> </div>
+          </div>
+					{/maccms:vod}
+          <ul class="clearfix mg-0">
+						{maccms:vod num="24" start="2" type="current" by="hits" order="desc"}
+            <li class="list p-0"> <a class="pull-left" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}"> <em class="num {if $key lt 3} active{/if}">{$key+1}</em>{$vo.vod_name} </a> </li>
+						{/maccms:vod}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="block/foot"}
+<span style="display:none" class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}" data-type="hits"></span>
+<style>
+.box-video-text-list ul li.list {
+  margin: 7.6px 0;
+}
+@media (min-width: 992px) {
+.col-md-8-fix {
+  width: 66.6666%!important;
+}
+</style>
+</body>
+</html>

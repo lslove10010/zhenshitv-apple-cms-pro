@@ -1,0 +1,44 @@
+<div id="banner" class="stui-banner carousel slide clearfix" data-ride="carousel">
+	<a class="carousel-control carousel-side left" href="#banner" data-slide="prev"><i class="icon iconfont icon-back"></i></a>
+	<a class="carousel-control carousel-side right" href="#banner" data-slide="next"><i class="icon iconfont icon-more"></i></a>
+    <div class="carousel-inner">
+    	{maccms:vod num="5" type="all" order="desc" by="time" id="vo1" key="key1" level="5"}
+        <div class="item stui-banner__item{if condition="$key eq 0"} active{/if}">
+			<a class="stui_banner__pic" href="{:mac_url_vod_detail($vo1)}">
+				<img class="banner-pic img-responsive" data-wap="{:mac_url_img($vo1.vod_pic_thumb)}" src="{:mac_url_img($vo1.vod_pic_slide)}"/>
+			</a>		
+		</div>
+        {/maccms:vod}
+    </div>
+    <ul class="carousel-indicators carousel-text visible-lg">
+    	{maccms:vod num="5" type="all" order="desc" by="time" id="vo2" key="key2" level="5"}
+        <li data-target="#banner" data-slide-to="{$key}" class="{if condition="$key eq 0"}active{/if}">
+        	<h4 class="title">{$vo2.vod_name|mac_substring=14|}</h4>
+			<p class="text">{$vo2.vod_actor|mac_substring=14|mac_default='内详'}</p>
+        </li>
+        {/maccms:vod}
+    </ul> 
+    <ol class="carousel-indicators carousel-bootom visible-xs">
+    	{maccms:vod num="5" type="all" order="desc" by="time" id="vo3" key="key3" level="5"}
+        <li data-target="#banner" data-slide-to="{$key}"{if condition="$key eq 0"} class="active"{/if}></li>
+        {/maccms:vod}
+    </ol>    
+</div>
+<script type="text/javascript">
+	var bannerhigh = $(".carousel-text").outerHeight()/2;
+	$(".carousel-text").css("margin-top",-bannerhigh);
+	if(stui.browser.useragent.mobile){
+		$(".carousel-text").remove();
+		$(".banner-pic").each(function(){
+			var wapurl = $(this).attr("data-wap");
+			if(wapurl!='/'){
+				$(this).attr("src",wapurl);
+			}			
+		});
+	}
+</script>
+<style type="text/css">
+	body{ padding: 0 !important;}
+	.stui-header__top{ background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0) 100%);}
+	.stui-header__top.headroom--not-top{ background: #292838;}
+</style>

@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>留言板 - {$maccms.site_name}</title>
+<meta name="keywords" content="{if !empty($maccms.seo.vod.key)}{$maccms.seo.vod.key}{else/}{$maccms.site_keywords}{/if}">
+<meta name="description" content="{if !empty($maccms.seo.vod.des)}{$maccms.seo.vod.des}{else/}{$maccms.site_description}{/if}">
+{include file="block/include"}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+  <div class="row">
+    <div class="col-md-9 col-sm-12 box-main-content">
+      <div class="layout-box clearfix">
+        <div class="box-title bt">
+          <h3 class="m-0"><i class="icon iconfont">&#xe635;</i>留言板</h3>
+          <div class="more pull-right">共有<span class="text-color">“<span id="total"></span>”</span>条留言</div>
+        </div>
+        <div class="comment-focus" id="content">
+          <ul class="ui-comment">
+            {maccms:gbook num="20" paging="yes" order="desc" by="id"}
+            <li class="comment-item fn-clear">
+              <div class="comment-num hidden-xs"><em class="text-color">{$vo.gbook_id}</em><span class="text-muted">条留言<span></span></span></div>
+              <div class="comment-post">
+                <div class="comment-post-cnt">
+                  <div class="comment-body">
+                    <div class="comment-top"><span class="user">{$vo.gbook_name}</span><span class="time">{$vo.gbook_time|mac_day}</span></div>
+                    <div class="comment-text">{$vo.gbook_content}</div>
+										{if condition="$vo.gbook_reply_time gt 0"}
+									  <div class="comment-reply" style="color:#f60;">
+											管理员回复：{$vo.gbook_reply}
+										</div>
+									  {/if}
+                  </div>
+                </div>
+              </div>
+            </li>
+            {/maccms:gbook}
+          </ul>
+        </div>
+        {include file="block/paging"}
+			</div>
+    </div>
+    <div class="col-md-3 col-sm-12 col-xs-12 box-main-side">
+      <div class="layout-box clearfix pg-0">
+        <div class="box-title bt">
+          <h3 class="m-0"><i class="icon iconfont">&#xe65b;</i>我要留言</h3>
+        </div>
+        <form class="gbook_form">
+          <div class="col-md-12 "> </div>
+          <div class="col-md-12">
+            <textarea cols="40" class="form-control txt gbook_content" name="gbook_content" id="gbook_content" rows="5" placeholder="输入留言内容"></textarea>
+          </div>
+          {if condition="$gbook.verify eq 1"}
+          <div class="col-md-12 clearfix">
+            <div class="col-md-6 col-xs-6 p-0">
+              <input class="form-control txt" name="verify" type="text" placeholder="验证码" autocomplete="off">
+            </div>
+            <div class="col-md-6 col-xs-6" style="padding:0px 5px"><img src="{:mac_url('verify/index')}" onClick="this.src+='?'" style="width:100%;height:34px;border-radius:2px;"></div>
+          </div>
+          {/if}
+          <div class="col-md-12 clearfix">
+            <button type="button" class="btn btn-primary pull-left gbook_submit">发送留言</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="block/foot"} 
+<script>
+$(function(){
+  MAC.Gbook.Login = {$gbook.login};
+  MAC.Gbook.Verify = {$gbook.verify};
+  MAC.Gbook.Init();
+  $("#total").text({$__PAGING__.record_total});
+});
+</script>
+</body>
+</html>

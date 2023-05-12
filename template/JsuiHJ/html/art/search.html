@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>{if !empty($obj.type_title)}{$obj.type_title}{else/}{$obj.type_name} - {$maccms.site_name}{/if}</title>
+<meta name="keywords" content="{if !empty($obj.type_key)}{$obj.type_key}{else/}{$obj.type_name}{$maccms.site_keywords}{/if}"/>
+<meta name="description" content="{if !empty($obj.type_des)}{$obj.type_des}{else/}{$obj.type_name}{$maccms.site_description}{/if}"/>
+{include file="block/include"}
+{php}
+  if(!empty($obj['type_extend']['class'])) {
+    $classArray=explode(',',$obj['type_extend']['class']);
+  }elseif(!empty($obj['parent']['type_extend']['class'])){
+    $classArray=explode(',',$obj['parent']['type_extend']['class']);
+  }else{
+    $classArray=explode(',',$GLOBALS['config']['app']['vod_extend_class']);
+  }
+  if(!empty($obj['type_extend']['area'])) {
+    $areaArray=explode(',',$obj['type_extend']['area']);
+  }elseif(!empty($obj['parent']['type_extend']['area'])){
+    $areaArray=explode(',',$obj['parent']['type_extend']['area']);
+  }else{
+    $areaArray=explode(',',$GLOBALS['config']['app']['vod_extend_area']);
+  }
+  if(!empty($obj['type_extend']['year'])) {
+    $yearArray=explode(',',$obj['type_extend']['year']);
+  }elseif(!empty($obj['parent']['type_extend']['year'])){
+    $yearArray=explode(',',$obj['parent']['type_extend']['year']);
+  }else{
+    $yearArray=explode(',',$GLOBALS['config']['app']['vod_extend_year']);
+  }
+  $letterArray=explode(',','A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0-9');
+  if(!empty($obj['childids'])){
+    $parentObj=$obj;
+  }elseif(!empty($obj['parent'])){
+    $parentObj=$obj['parent'];
+  }
+{/php}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+  <div class="row">
+    <div class="layout-box clearfix">
+      <div class="box-title">
+        <h3 class="m-0"><i class="icon iconfont text-color">&#xe626;</i>{$obj.type_name}</h3>
+				{if !empty($parentObj)}
+				<div class="box-title-nav">
+          <ul class="clearfix">
+            {maccms:type ids="child" parent="'.$parentObj['type_id'].'" flag="art" num="30" by="sort" order="asc"}
+            <li class="{if $key gt 6} hidden-sm hidden-xs{/if}"><a class="text-overflow {if $vo.type_id==$obj.type_id} active{/if}" href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+            {/maccms:type}
+          </ul>
+        </div>
+				{/if}
+      </div>
+      <div class="box-topic-list clearfix">
+        <ul class="item">
+					{maccms:art paging="yes" num="30" by="time" order="desc" pageurl="art/type"}
+          {include file="block/item_art"}
+					{/maccms:art}
+        </ul>
+      </div>
+      {include file="block/paging"}
+    </div>
+  </div>
+</div>
+{include file="block/foot"}
+</body>
+</html>

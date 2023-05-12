@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{$obj.vod_name}详情介绍-{$obj.vod_name}在线观看-{$obj.vod_name}迅雷下载 - {$maccms.site_name}</title>
+    <meta name="keywords" content="{$obj.vod_name}在线收看,{$obj.vod_name}迅雷下载" />
+    <meta name="description" content="{$obj.vod_name}剧情:{$obj.vod_blurb}" /> 
+		{include file="block/include"}
+</head>
+<body>
+
+		{include file="block/head"}
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-wide-75 col-xs-1 padding-0">	
+            	
+            	<!-- 详细信息-->
+<div class="myui-panel myui-panel-bg clearfix">
+	<div class="myui-panel-box clearfix">
+
+		<div class="myui-rumbs col-pd clearfix">
+    		<span class="text-muted">当前位置：</span>
+    		<a href="{$maccms.path}">首页</a> &nbsp;&nbsp;<i class="fa fa-angle-right text-muted"></i>&nbsp;&nbsp;
+			<a href="{:mac_url_type($obj.type)}">{$obj.type.type_name}</a> &nbsp;&nbsp;<i class="fa fa-angle-right text-muted"></i>&nbsp;&nbsp;
+    		<span class="text-muted">{$obj.vod_name}</span>
+    	</div>
+    	
+		<div class="col-xs-1">	
+			<div class="myui-content__thumb">									
+				<a class="myui-vodlist__thumb img-lg-220 img-xs-130 picture" href="{:mac_url_vod_play($obj,['sid'=>1,'nid'=>1])}" title="{$obj.vod_name}">
+					<img class="lazyload" src="{$maccms.path_tpl}images/loading.gif" data-original="{:mac_url_img($obj.vod_pic)}"/>
+					<span class="play active hidden-xs"></span>
+					<span class="pic-text text-right">{if condition="$obj.vod_remarks neq ''"}{$obj.vod_remarks}{elseif condition="$obj.vod_serial gt 0"}第{$obj.vod_serial}集{else /}高清{/if}</span>				</a>
+			</div>
+			<div class="myui-content__detail">
+				
+				<h1 class="title">{$obj.vod_name}</h1>
+				
+				<!-- 评分 -->
+			    <div id="rating" class="score" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}" data-score="{$obj.vod_score}">
+
+
+
+			    	<span class="left text-muted">评分：</span>
+			    	<ul class="rating">
+				        <li title="很差" val="1"><i class="{if condition="$obj.vod_score gt 0"}fa fa-star{/if}"></i></li>
+				        <li title="较差" val="2"><i class="{if condition="$obj.vod_score gt 2"}fa fa-star{/if}"></i></li>
+				        <li title="还行" val="3"><i class="{if condition="$obj.vod_score gt 4"}fa fa-star{/if}"></i></li>
+				        <li title="推荐" val="4"><i class="{if condition="$obj.vod_score gt 6"}fa fa-star{/if}"></i></li>
+				        <li title="力荐" val="5"><i class="{if condition="$obj.vod_score gt 8"}fa fa-star{/if}"></i></li>
+				    </ul>
+<span class="branch">{$obj.vod_score}</span>
+
+    <span id="ratewords">{if condition="$obj.vod_score gt 8"}力荐
+{elseif condition="$obj.vod_score gt 6"/}推荐
+{elseif condition="$obj.vod_score gt 4"/}还行
+{elseif condition="$obj.vod_score gt 2"/}较差
+{else /}很差
+{/if}</span>
+				</div>
+
+				<p class="data">
+					<span class="text-muted">分类：</span><a href="{:mac_url_type($obj.type)}">{$obj.type.type_name}</a>
+					<span class="split-line"></span>
+					<span class="text-muted hidden-xs">地区：</span>{$obj.vod_area|mac_url_create='area'}
+					<span class="split-line"></span>
+					<span class="text-muted hidden-xs">年份：</span>{$obj.vod_year|mac_url_create='year'}				
+				</p>
+				<p class="data"><span class="text-muted">主演：</span>{$obj.vod_actor|mac_url_create='actor'}</p>
+				<p class="data"><span class="text-muted">导演：</span>{$obj.vod_director|mac_url_create='director'} </p>
+				<p class="data hidden-sm hidden-xs"><span class="text-muted">更新：</span>{$obj.vod_time|date='Y-m-d',###}</p>														
+				<p class="desc text-collapse hidden-xs">
+					<span class="left text-muted">简介：</span>
+					<span class="sketch">{$obj.vod_content|mac_filter_html|mac_substring=100}...</span>
+					<span class="data" style="display: none;">{$obj.vod_content|mac_filter_html}</span>
+					<a class="details" href="javascript:;">详情 <i class="fa fa-angle-down"></i></a>
+				</p>							    
+				<div class="operate clearfix">
+										<a class="btn btn-warm" href="{:mac_url_vod_play($obj,['sid'=>1,'nid'=>1])}"><i class="fa fa-play"></i>播放</a>
+										<a class="btn btn-info dropdown-hover hidden-xs" href="javascript:;">
+						<div class="dropdown-box top fadeInDown clearfix">
+							<div class="item text-center">
+								<div class="-box">
+									<img src="{$maccms.path_tpl}images/shoukuan.png" width="160" />
+								</div>
+								<p class="text-muted">扫码支付任意金额</p>
+							</div>
+						</div>
+						<i class="fa fa-cny hidden-xs"></i> 打赏
+					</a>
+					<a href="javascript:void(0);" class="btn btn-default favorite" data-type="2" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}"><i class="fa fa-star"></i> 收藏</a>
+										<a class="btn btn-default dropdown-hover hidden-xs" href="javascript:;">
+						<div class="dropdown-box top fadeInDown clearfix">
+							<div class="item text-center">
+								<div class="qrcode-box active" style="background-color: #ffffff;">
+	<span><img width="160" height="160" src="http://www.hez70.com/qrcode/qr.php?url=http://{$maccms.site_url}" width="35" height="35" /></span>
+</div>
+<p>扫一扫用手机观看</p>
+							</div>
+						</div>
+						<i class="fa fa-qrcode font14"></i> 手机观看
+					</a>
+									<!--<a class="btn btn-warm " href="#pl"><i class="fa fa-commenting"></i>评论</a>-->
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript"> Myui.Score();</script>
+
+<!-- end 详细信息--><!-- 详细信息-->
+
+		{include file="vod/playlist"}
+		<script type="text/javascript">
+			$(".tab-pane:first").addClass("active");
+		</script>
+<!-- 播放地址-->
+		{include file="vod/downlist"}
+
+		{include file="vod/actor"}
+		<!--演员-->
+	<!--演员-->
+		{include file="vod/like"}
+	
+		{include file="vod/look"}
+	</div>				
+			<div class="col-lg-wide-25 col-xs-1 myui-sidebar hidden-sm hidden-xs">
+				{include file="vod/hot"}<!-- 热播-->
+				{include file="vod/hot1"}<!-- 正在热播-->
+			</div>
+        </div>
+    </div>
+	<span class="mac_hits hits hide" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}{$obj.topic_id}" data-type="hits"></span>
+	<span class="mac_ulog_set hide" data-type="4" data-mid="{$maccms.mid}" data-id="{:mac_url_vod_play($obj,['sid'=>1,'nid'=>1])}" data-sid="{$param.sid}" data-nid="{$param.nid}"></span>
+		{include file="block/foot"}
+</body>
+</html>
+

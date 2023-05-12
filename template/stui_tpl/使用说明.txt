@@ -1,0 +1,11 @@
+
+使用安装：
+
+1.解压压缩包得到statics和template目录一并上传至网站根目录
+2.后台选择模板stui_tpl（为了防止模板被下载在测试无误后请修改template目录下stui_tpl名字）
+3.网站所用到的素材全部在statics目录，例：statics\img\logo.png
+
+模板设置：
+
+首页幻灯片是推荐5的影片，最多10个，并上传对应海报图
+部分个性化配置文件statics\js\stui_block.js根据注释修改

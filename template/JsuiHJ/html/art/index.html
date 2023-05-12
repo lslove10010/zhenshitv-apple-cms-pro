@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>{if !empty($maccms.seo.art.name)}{$maccms.seo.art.name}{else/}新闻资讯 - {$maccms.site_name}{/if}</title>
+<meta name="keywords" content="{if !empty($maccms.seo.art.key)}{$maccms.seo.art.key}{else/}{$maccms.site_keywords}{/if}">
+<meta name="description" content="{if !empty($maccms.seo.art.des)}{$maccms.seo.art.des}{else/}{$maccms.site_description}{/if}">
+{include file="block/include"}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+  <div class="row">
+    <div class="layout-box clearfix">
+      <div class="box-title">
+        <h3 class="m-0"><i class="icon iconfont text-color">&#xe626;</i>新闻资讯</h3>
+				<div class="box-title-nav">
+          <ul class="clearfix">
+            {maccms:type ids="parent" flag="art" num="30" by="sort" order="asc"}
+            <li><a class="text-overflow" href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+            {/maccms:type}
+          </ul>
+        </div>
+      </div>
+      <div class="box-topic-list clearfix">
+        <ul class="item">
+					{maccms:art paging="yes" num="30" by="time" order="desc" pageurl="art/index"}
+          {include file="block/item_art"}
+					{/maccms:art}
+        </ul>
+      </div>
+      {include file="block/paging"}
+    </div>
+  </div>
+</div>
+{include file="block/foot"}
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>{if !empty($obj.type_title)}{$obj.type_title}{else/}{$obj.type_name} - {$maccms.site_name}{/if}</title>
+<meta name="keywords" content="{if !empty($obj.type_key)}{$obj.type_key}{else/}{$obj.type_name}{$maccms.site_keywords}{/if}"/>
+<meta name="description" content="{if !empty($obj.type_des)}{$obj.type_des}{else/}{$obj.type_name}{$maccms.site_description}{/if}"/>
+{include file="block/include"}
+{php}
+  if(!empty($obj['type_extend']['class'])) {
+    $classArray=explode(',',$obj['type_extend']['class']);
+  }elseif(!empty($obj['parent']['type_extend']['class'])){
+    $classArray=explode(',',$obj['parent']['type_extend']['class']);
+  }else{
+    $classArray=explode(',',$GLOBALS['config']['app']['vod_extend_class']);
+  }
+  if(!empty($obj['type_extend']['area'])) {
+    $areaArray=explode(',',$obj['type_extend']['area']);
+  }elseif(!empty($obj['parent']['type_extend']['area'])){
+    $areaArray=explode(',',$obj['parent']['type_extend']['area']);
+  }else{
+    $areaArray=explode(',',$GLOBALS['config']['app']['vod_extend_area']);
+  }
+  if(!empty($obj['type_extend']['year'])) {
+    $yearArray=explode(',',$obj['type_extend']['year']);
+  }elseif(!empty($obj['parent']['type_extend']['year'])){
+    $yearArray=explode(',',$obj['parent']['type_extend']['year']);
+  }else{
+    $yearArray=explode(',',$GLOBALS['config']['app']['vod_extend_year']);
+  }
+  $letterArray=explode(',','A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,0-9');
+  if(!empty($obj['childids'])){
+    $parentObj=$obj;
+  }elseif(!empty($obj['parent'])){
+    $parentObj=$obj['parent'];
+  }
+{/php}
+</head>
+<body>
+{include file="block/head"}
+<br>
+<div class="container">
+  <div class="row">
+    <div class="list-mcat clearfix">
+      <div class="left-head hidden-sm hidden-xs">
+        <ul class="clearfix">
+          <li class="text" style="padding:6px 0;"><span class="text-muted">选择频道</span></li>
+					{maccms:type ids="parent" flag="vod" by="sort" order="asc" num="10"}
+          <li class="list-custom-menu"><a {if $vo.type_id==$GLOBALS.type_id||$vo.type_id==$GLOBALS.type_pid} class=" active"{/if} href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+					{/maccms:type}
+          <li class="text" style="padding:6px 0;"><span class="text-muted"></span></li>
+        </ul>
+      </div>
+      <div class="content-menu clearfix">
+        <div class="item  list_type" id="">
+          <ul class="clearfix">
+          </ul>
+					{if !empty($parentObj)}
+          <ul class="clearfix">
+            <li class="text"><span class="text-muted">按分类</span></li>
+            <li><a {if $parentObj.type_id==$obj.type_id} class="active"{/if} href="{:mac_url_type($parentObj,['area'=>$param.area,'year'=>$param.year,'by'=>$param.by],show)}" title="全部">全部</a></li>
+						{maccms:type ids="child" parent="'.$parentObj['type_id'].'" num="15" by="sort" order="asc"}
+            <li><a {if $vo.type_id==$obj.type_id} class="active"{/if} href="{:mac_url_type($vo,['area'=>$param.area,'year'=>$param.year,'by'=>$param.by],show)}" title="{$vo.type_name}">{$vo.type_name}</a></li>
+						{/maccms:type}
+          </ul>
+					{/if}
+					<ul class="clearfix">
+            <li class="text"><span class="text-muted">按地区</span></li>
+            <li><a {if empty($param.area)} class="active"{/if} href="{:mac_url_type($obj,['year'=>$param.year,'by'=>$param.by],show)}" title="全部">全部</a></li>
+						{maccms:foreach name="areaArray"}
+            <li><a {if $vo==$param.area} class="active"{/if} href="{:mac_url_type($obj,['area'=>$vo,'year'=>$param.year,'by'=>$param.by],show)}" title="{$vo}">{$vo}</a></li>
+						{/maccms:foreach}
+          </ul>
+          <ul class="clearfix">
+            <li class="text"><span class="text-muted">按年份</span></li>
+            <li><a {if empty($param.year)} class="active"{/if} href="{:mac_url_type($obj,['area'=>$param.area,'by'=>$param.by],show)}" title="全部">全部</a></li>
+            {maccms:foreach name="yearArray"}
+            <li><a {if $vo==$param.year} class="active"{/if} href="{:mac_url_type($obj,['area'=>$param.area,'year'=>$vo,'by'=>$param.by],show)}" title="{$vo}">{$vo}</a></li>
+						{/maccms:foreach}
+          </ul>
+          <ul class="clearfix"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="tv_list_box hidden-xs"> </div>
+    <div class="g2_pc_list_top" style="margin-top:15px;"></div>
+		{if $maccms.aid!=12 && !empty($obj.childids)}
+		{maccms:type ids="child" parent="'.$obj['type_id'].'" num="20" by="sort" order="asc" id="type" key="key_type"}
+    <div class="layout-box clearfix">
+      <div class="box-title">
+        <h3 class="m-0"><img src="{$maccms.path_tpl}images/playicon.png" height="24px" width="24px">
+          &nbsp;{$type.type_name}</h3>
+        <div class="more pull-right"><a href="{:mac_url_type($type,[],show)}" class="text-muted" title="更多">更多 <i class="icon iconfont">&#xe65e;</i></a></div>
+      </div>
+      <ul class="item">
+				{maccms:vod num="12" type="'.$type['type_id'].'" by="time" order="desc"}
+				{include file="block/item"}
+				{/maccms:vod}
+      </ul>
+      <div class="box-video-footer visible-xs clearfix"><a href="{:mac_url_type($type,[],show)}" class="text-more" title="查看更多">查看更多 <i class="icon iconfont icon-right pull-right"></i></a></div>
+    </div>
+		{/maccms:type}
+		{else/}
+		<div class="layout-box clearfix">
+      <div class="box-switch-tabs active clearfix">
+        <ul class="nav nav-tabs ajax-nav-tabs">
+          <li {if $param.by=='time' || empty($param.by)} class="active"{/if}><a href="{:mac_url_type($obj,['area'=>$param.area,'year'=>$param.year,'by'=>'time'],show)}">按更新排序</a></li>
+          <li {if $param.by=='hits'} class="active"{/if}><a href="{:mac_url_type($obj,['area'=>$param.area,'year'=>$param.year,'by'=>'hits'],show)}">按热门排序</a></li>
+        </ul>
+      </div>
+      <div class="box-video-list">
+        <div class="item">
+          <ul class="clearfix" id="content">
+						{php}
+						if($maccms['aid']==11){
+						  $myPageUrl='vod/type';
+						}elseif($maccms['aid']==12){
+						  $myPageUrl='vod/show';
+						}elseif($maccms['aid']==21){
+						  $myPageUrl='art/type';
+						}elseif($maccms['aid']==22){
+						  $myPageUrl='art/show';
+						}
+						{/php}
+            {maccms:vod num="30" paging="yes" order="desc" by="time" pageurl="'.$myPageUrl.'"}
+						{include file="block/item"}
+						{/maccms:vod}
+          </ul>
+        </div>
+      </div>
+			{include file="block/paging"}
+    </div>
+		{/if}
+  </div>
+  <div class="g2_pc_list_down" style="margin-top:15px;"></div>
+</div>
+{include file="block/foot"}
+</body>
+</html>

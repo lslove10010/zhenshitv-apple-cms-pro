@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>《{$obj.vod_name}》{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']} - {$obj['vod_play_list'][$param['sid']]['player_info']['show']} - {$maccms.site_name}</title>
+<meta name="keywords" content="{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']},{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}在线看,{$obj.vod_name}全集,{$obj.type.type_name}{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']},
+{if condition="($obj.type.type_id == 1) || ($obj.type_id_1 == 1) "}{$obj.vod_remarks|default='高清'}{else/}{notempty name="vo.vod_remarks"}{$obj.vod_remarks}{elseif condition="!empty($obj.vod_serial)"/}更新至第{$obj.vod_serial}集{else/}全集{/notempty}{/if}在线看,{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}{$obj['vod_play_list'][$param['sid']]['player_info']['show']},{$obj.vod_name}{$obj['vod_play_list'][$param['sid']]['player_info']['show']}在线看">
+<meta name="description" content="正在为您播放{$obj.type.type_name} {$obj.vod_name}-{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}{if condition="($obj.type.type_id == 1) || ($obj.type_id_1 == 1) "}{$obj.vod_remarks|default='高清'}{else/}{notempty name="vo.vod_remarks"}{$obj.vod_remarks}{elseif condition="!empty($obj.vod_serial)"/}更新至第{$obj.vod_serial}集{else/}全集{/notempty}{/if} {$obj['vod_play_list'][$param['sid']]['player_info']['show']} 线上看，{$obj.vod_name}是{$obj.vod_area}由{$obj.vod_director}执导{$obj.vod_actor}主演参演，上映时间为{$obj.vod_year}年。主要剧情：{$obj.vod_blurb}">
+{include file="block/include"}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+<div class="row">
+  <div class="layout-box clearfix p-0 m-1">
+    <div class="col-md-12 col-sm-12 col-xs-12 player_left max">
+      <div class="player_title hidden">
+        <div class="play_nav hidden-xs"><a href="{$obj.type|mac_url_type}">{$obj.type.type_name}</a><i class="icon iconfont">&#xe65e;</i><a href="{$obj|mac_url_vod_detail}">{$obj.vod_name}</a><i class="icon iconfont">&#xe65e;</i> </div>
+        <h1 class="hidden-xs"><a href="{$obj|mac_url_vod_detail}">{$obj.vod_name}线上看</a> - {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}</h1>
+        <div class="player-tool hidden-xs"></div>
+      </div>
+      <div id="zanpiancms_player"> {$player_data}{$player_js} </div>
+      <div class="player_bottom">
+        <div class="col-md-8 col-sm-8 col-xs-12 p-0">
+          <div class="details-tool" id="zanpian-score">
+            <div class="vod-sect user-bt">
+              <div class="sect-show"> </div>
+            </div>
+            <div class="vod-rss user-bt">
+              <div class="sect-show"> </div>
+            </div>
+            <div id="updown"> <a rel="nofollow" class="b-l b-r" href="{$obj.player_info.link_pre}" id="pre" target="_self"><i class="iconfont hidden-xs hidden-sm">&#xe8ff;</i>上一集</a> <a href="{$obj.player_info.link_next}" class="b-l" id="next" target="_self">下一集<i class="iconfont hidden-xs hidden-sm">&#xe65e;</i></a> </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 p-0 prevnext hidden-xs"> </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12  player_right pg-0">
+      <div class="player_title2 visible-xs" style="white-space: normal;padding-right:10px;"> <a style="color:#fa474b;" href="../video/71423.html">{$obj.vod_name}</a> - {$obj['vod_play_list'][$param['sid']]['player_info']['show']}{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}
+        <ul style="font-size:14px;">
+          <li> <span style="font-weight:400;">类别：</span><a href="{$obj.type|mac_url_type}">{$obj.type.type_name}</a> <span style="margin-left:5px;margin-right:5px;">|</span> <span style="font-weight:400;">年份：</span> <span>{$obj.vod_year}</span> <span style="margin-left:5px;margin-right:5px;">|</span> <span style="font-weight:400;">更新时间：</span> <span>{$obj.vod_time|date='Y-m-d',###}</span>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <span class="detail-intro visible-xs" style="white-space: normal;margin-bottom:5px;padding-right: 10px;padding-left: 5px;padding-bottom: 10px;">{$obj.vod_blurb}</span>
+      <center>
+        <div class="addthis_inline_share_toolbox_lz5f  visible-xs" style="padding-bottom: 10px;"></div>
+      </center>
+      <div class="details-play-title hidden-xs">
+        <ul class="nav nav-tabs">
+          <a class="play-nav-custom" href="{$obj|mac_url_vod_detail}">{$obj.vod_name}</a><span style="margin-left:15px;">现在播放: {$obj['vod_play_list'][$param['sid']]['player_info']['show']} - {$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}</span>
+          <p class="play-nav-custom-li" style="margin-top:5px;"><span class="span-title">类别：</span><a href="{$obj.type|mac_url_type}">{$obj.type.type_name}</a> <span style="margin-left:10px;margin-right:10px;">|</span><span class="span-title">年份：</span> <span class="span-text">{$obj.vod_year}</span> <span style="margin-left:10px;margin-right:10px;">|</span> <span class="span-title">更新时间：</span> <span class="span-text">{$obj.vod_time|date='Y-m-d',###}</span></p>
+        </ul>
+      </div>
+    </div>
+    <div class="player-open"></div>
+  </div>
+  <div class="mobile-playlist hidden-sm hidden-md hidden-lg" style="margin-top: 10px"> 
+		{maccms:foreach name="obj.vod_play_list" id="vo"}
+    <div class="playlist-mobile playlist layout-box clearfix activeplayer_{$key}"> <i class="gico {$vo.player_info.from}" style="display:inline-block;width:15px;height:20px;background-position: 0px 3px;"></i> <span style="font-weight:700;">{$vo.player_info.show}</span>
+      <ul class="clearfix fade in active" id="conmobi_playlist_{$key}">
+        {maccms:foreach name="vo.urls" id="vo2" key="key2"}
+        <li class="list4"><a {if $vo.sid==$param.sid && $vo2.nid==$param.nid} class="active"{/if} target="_self" href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+        {/maccms:foreach}
+      </ul>
+    </div>
+		{if $vo.sid==$param.sid}
+		<script>
+      $('.mobile-playlist').ready(function(){
+        $('.activeplayer_{$key}').prependTo('.mobile-playlist');
+      });
+    </script>
+		{/if}
+    {/maccms:foreach} 
+     
+  </div>
+  <div class="col-md-9 col-sm-12 box-main-content" style="position:static">
+    <div style="text-align: center;margin-top:15px;"></div>
+    <div class="details-play-title">
+      <ul class="nav nav-tabs hidden-xs" id="playTab">
+        {if count($obj.vod_play_list) gt 5}
+        {maccms:foreach name="obj.vod_play_list" id="vo"}
+        {if $key lt 6}
+        <li class="hidden-xs {if $vo.sid==$param.sid} active{/if}"><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" data-toggle="tab">{$vo.player_info.show}</a></li>
+        {/if}
+        {/maccms:foreach}
+        <li class="dropdown player-more"> <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">更多<b class="caret"></b></a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+            {maccms:foreach name="obj.vod_play_list" id="vo"}
+            {if $key gt 5}
+            <li><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" tabindex="-1" data-toggle="tab">{$vo.player_info.show}</a></li>
+            {/if}
+            {/maccms:foreach}
+          </ul>
+        </li>
+        {else/}
+        {maccms:foreach name="obj.vod_play_list" id="vo"}
+        <li class="hidden-xs {if $vo.sid==$param.sid} active{/if}"><a class="gico {$vo.player_info.from}" href="#con_playlist_{$key}" data-toggle="tab">{$vo.player_info.show}</a></li>
+        {/maccms:foreach}
+        {/if}
+        <div class="play-bug"><a rel="nofollow" href="{:mac_url('gbook/index')}"><i class="iconfont">&#xe635;</i>报错</a></div>
+      </ul>
+    </div>
+    <div class="layout-box clearfix m-0 hidden-xs">
+      <div class="playlist"> 
+				{maccms:foreach name="obj.vod_play_list" id="vo"}
+        <ul class="clearfix fade {if $vo.sid==$param.sid} in active{/if}" id="con_playlist_{$key}">
+          {maccms:foreach name="vo.urls" id="vo2"}
+          <li><a {if $vo.sid==$param.sid && $vo2.nid==$param.nid} class="active"{/if} href="{:mac_url_vod_play($obj,['sid'=>$vo.sid,'nid'=>$vo2.nid])}">{$vo2.name}</a></li>
+          {/maccms:foreach}
+        </ul>
+        {/maccms:foreach}
+			</div>
+    </div>
+    <div style="text-align: center;margin-top:15px;"></div>
+    <div class="layout-box clearfix">
+      <div class="box-title">
+        <h3 class="m-0">热播{$obj.type.type_name}</h3>
+      </div>
+      <div class="swiper-container vod-swiper-5">
+        <ul class="swiper-wrapper">
+          {maccms:vod num="15" not="'.$obj['vod_id'].'" type="current" by="hits_week" order="desc"}
+          {include file="block/item_slide"}
+          {/maccms:vod}
+        </ul>
+        <div class="swiper-button-next hidden-xs"><i class="icon iconfont icon-right"></i></div>
+        <div class="swiper-button-prev hidden-xs"><i class="icon iconfont icon-left"></i></div>
+      </div>
+    </div>
+    <div class="layout-box clearfix">
+      <div class="box-title">
+        <h3 class="m-0">热门推荐</h3>
+      </div>
+      <div class="swiper-container vod-swiper-5">
+        <ul class="swiper-wrapper">
+          {maccms:vod num="15" not="'.$obj['vod_id'].'" by="hits" order="desc"}
+          {include file="block/item_slide"}
+          {/maccms:vod}
+        </ul>
+        <div class="swiper-button-next hidden-xs"><i class="icon iconfont icon-right"></i></div>
+        <div class="swiper-button-prev hidden-xs"><i class="icon iconfont icon-left"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3 col-sm-12 box-main-side hidden-sm hidden-xs">
+    <div class="layout-box clearfix">
+      <div class="box-title " style="padding:0px 0px 10px 0">
+        <h3 class="m-0"><i class="icon iconfont text-color">&#xe66e;</i>{$obj.type.type_name}排行榜</h3>
+      </div>
+      <div class="box-video-text-list"> 
+				{maccms:vod num="1" type="current" by="hits" order="desc"}
+        <div class="col-md-6 col-sm-12 col-xs-12 p-0"> <a class="video-pic" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}" style="background: url({$vo.vod_pic|mac_url_img}) no-repeat top center;background-size:cover;"><span class="note text-bg-r">{include file="block/status"}</span><span class="num">{$key}</span></a> </div>
+        <div class="col-md-6 col-sm-12 col-xs-12" style=" padding-top:0px; padding-right:0px;">
+          <div class="col-md-12 p-0 text-overflow"> <strong>{$vo.vod_name}</strong> </div>
+          <div class="col-md-12 pg-0 text-overflow"> </div>
+          <div class="col-md-12 p-0 text-overflow"> {$vo.vod_actor} </div>
+          <div class="col-md-12 p-0 text-overflow"> {include file="block/status"} </div>
+          <div class="col-md-12 pg-0 text-overflow"> </div>
+        </div>
+        {/maccms:vod}
+        <ul class="clearfix mg-0">
+          {maccms:vod num="17" start="2" type="current" by="hits" order="desc"}
+          <li class="list p-0"> <a class="pull-left" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}"> <em class="num {if $key lt 3} active{/if}">{$key+1}</em>{$vo.vod_name} </a> </li>
+          {/maccms:vod}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{include file="block/foot"}
+<span style="display:none" class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}" data-type="hits"></span>
+<span style="display:none" class="mac_history_set2" alt="设置History历史记录" data-id="{$obj.vod_id}" data-name="{$obj.vod_name}" data-playname="{$obj['vod_play_list'][$param['sid']]['urls'][$param['nid']]['name']}" data-link=""></span>
+</body>
+</html>

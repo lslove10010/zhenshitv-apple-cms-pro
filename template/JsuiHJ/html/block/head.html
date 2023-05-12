@@ -1,0 +1,45 @@
+
+<nav class="navbar navbar-inverse {if $maccms.aid==1} navbar-alpha{/if}" role="navigation">
+  <div class="container">
+    <div class="row">
+      <div class="navbar-header">
+        <div class="navbar-toggle navbar-search" title="播放记录"><i class="icon iconfont">&#xe78d;</i></div>
+        <a class="navbar-brand" href="{$maccms.path}"><img src="{$maccms.site_logo|mac_url_img}"></a></div>
+      <div class="user-search hidden-md hidden-lg">
+        <div class="nav-search">
+          <form data-limit="10" name="formsearch" id="formsearch" action="{:mac_url('vod/search')}" method="get" autocomplete="off">
+            <input class="form-control zanpian_wd" placeholder="输入影片关键字..." name="wd" required="" type="text">
+            <button type="submit" class="btn btn-search"><i class="icon iconfont">&#xe642;</i></button>
+          </form>
+        </div>
+      </div>
+      <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav navbar-left">
+          <li {if $maccms.aid==1} class="active"{/if}><a {if $maccms.aid==1} class="white-font"{/if} href="{$maccms.path}">首页</a></li>
+          {maccms:type num="10" flag="vod" by="sort" order="asc" ids="parent"}
+          <li {if $vo.type_id==$GLOBALS.type_id||$vo.type_id==$GLOBALS.type_pid} class="menu-active"{/if}><a {if $maccms.aid==1} class="white-font"{/if} href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+          {/maccms:type}
+          {maccms:type num="10" flag="art" by="sort" order="asc" ids="parent"}
+          <li {if $vo.type_id==$GLOBALS.type_id||$vo.type_id==$GLOBALS.type_pid} class="menu-active"{/if}><a {if $maccms.aid==1} class="white-font"{/if} href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+          {/maccms:type}
+          <li {if $label_page=='top'} class="menu-active"{/if}><a {if $maccms.aid==1} class="white-font"{/if} href="{:mac_url('label/top')}">排行</a></li>
+        </ul>
+        <div class="nav-search  visible-md visible-lg">
+          <form data-limit="10" name="formsearch" id="formsearch" action="{:mac_url('vod/search')}" method="get" autocomplete="off">
+            <input class="scroll-effect {if $maccms.aid==1} search-box-on-top{/if} form-control zanpian_wd" placeholder="输入影片关键词..." name="wd" id="wd" required="" type="text">
+            <button type="submit" class="btn btn-search"><i class="icon iconfont">&#xe642;</i></button>
+          </form>
+        </div>
+        <div class="user_playlog hidden-xs" id="user_playlog" title="播放记录"><i class="icon iconfont">&#xe665;</i>
+          <div id="playlog_list" class="playlog_list">
+            <ul>
+              <strong>loading...</strong>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="my-scrollmenu visible-xs"> <a class="head-menu-a {if $maccms.aid==1} active{/if}" href="{$maccms.path}">首页</a> {maccms:type num="10" flag="vod" by="sort" order="asc" ids="parent"} <a class="head-menu-a {if $vo.type_id==$GLOBALS.type_id||$vo.type_id==$GLOBALS.type_pid} active{/if}" href="{$vo|mac_url_type}">{$vo.type_name}</a> {/maccms:type}
+  {maccms:type num="10" flag="art" by="sort" order="asc" ids="parent"} <a class="head-menu-a {if $vo.type_id==$GLOBALS.type_id||$vo.type_id==$GLOBALS.type_pid} active{/if}" href="{$vo|mac_url_type}">{$vo.type_name}</a> {/maccms:type} <a class="head-menu-a {if $label_page=='top'} active{/if}" href="{:mac_url('label/top')}">排行</a> </div>

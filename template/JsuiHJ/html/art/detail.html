@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>{$obj.art_name} - {$obj.type.type_name} - {$maccms.site_name}</title>
+<meta name="keywords" content="{$obj.art_name}">
+<meta name="description" content="{$obj.art_blurb|mac_substring=100}">
+{include file="block/include"}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+  <div class="row">
+    <div class="layout-box clearfix">
+      <div class="col-md-7 col-sm-12 col-xs-12">
+        <div class="box-video-list">
+          <div class="item">
+            <div class="pic" style="padding-top:50%;background: url({$obj.art_pic|mac_url_img})  no-repeat; background-position:50% 50%; background-size: cover;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-12 col-xs-12">
+        <div class="box-topic-content">
+          <div class="head">
+            <h3>{$obj.art_name}</h3>
+          </div>
+          <div class="item">{$obj.art_blurb}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 col-sm-12 box-main-content">
+			<div class="layout-box clearfix" id="zanpian-cm" data-type="zanpian">
+        <div class="box-title hidden-xs">
+          <h3 class="m-0" style="font-weight: normal;text-align: center;display: block;font-size: 14px;">日期：{$obj.art_time|mac_day}&nbsp;&nbsp;热度：<span class="mac_hits hits" data-mid="{$maccms.mid}" data-id="{$obj.vod_id}{$obj.art_id}" data-type="hits">{$obj.art_hits}</span></h3>
+        </div>
+        <div class="box-comment">
+				{$obj.art_page_list[$param['page']]['content']}
+				</div>
+				{if $__PAGING__.page_total gt 1}
+				{include file="block/paging"}
+				{/if}
+      </div>
+      <div class="layout-box clearfix">
+        <div class="box-title">
+          <h3 class="m-0">推荐影片</h3>
+        </div>
+        <div class="box-topic-list clearfix">
+          <ul class="col-md-12 col-sm-12 col-xs-12 p-0 clearfix">
+						{maccms:vod num="12" by="time" order="desc"}
+            <li class="col-md-3 col-sm-3 col-xs-4"> <a class="video-pic loading" data-original="{$vo.vod_pic|mac_url_img}" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}"> <span class="player"></span> <span class="score">{$vo.vod_score}</span> <span class="note text-bg-r">{include file="block/status"}</span> </a>
+              <div class="title">
+                <h5 class="text-overflow"><a href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}">{$vo.vod_name}</a></h5>
+              </div>
+              <div class="subtitle text-muted text-overflow hidden-xs">{$vo.vod_actor|default="&nbsp;"}</div>
+            </li>
+						{/maccms:vod}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-12 box-main-side hidden-sm hidden-xs">
+      <div class="layout-box clearfix">
+        <div class="box-title pg-0">
+          <h3 class="m-0"><i class="icon iconfont text-color">&#xe66e;</i>韩剧影视排行榜</h3>
+        </div>
+        <div class="box-video-text-list clearfix p-0">
+          <ul class="clearfix mg-0">
+						{maccms:vod num="20" by="hits" order="desc"}
+            <li class="list p-0"><a class="pull-left" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}"><em class="num {if $key lt 4} active{/if}">{$key}</em>{$vo.vod_name}</a><span class="hits text-color">{$vo.vod_hits}</span></li>
+						{/maccms:vod}
+          </ul>
+        </div>
+        <div class="box-title" style="padding-left:0px; padding-right:0px;">
+          <h3 class="m-0"><i class="icon iconfont text-color">&#xe626;</i>热门{$obj.type.type_name}娱乐新闻</h3>
+          <div class="more pull-right"><a href="{$obj.type|mac_url_type}" class="text-muted" title="更多">更多 <i class="icon iconfont">&#xe65e;</i></a></div>
+        </div>
+        <div class="box-video-ranking clearfix" style="padding:0px">
+          <div class="item">
+            <ul class="clearfix">
+							{maccms:art num="8" not="'.$obj['art_id'].'" type="current" by="hits_week" order="desc"}
+              <li><a class="video-pic loading" href="{$vo|mac_url_art_detail}" title="{$vo.art_name}" data-original="{$vo.art_pic|mac_url_img}" style="padding-top:50%;"><span class="player"></span><span class="note text-bg-c">{$vo.art_name}</span></a></li>
+							{/maccms:art}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="block/foot"}
+</body>
+</html>

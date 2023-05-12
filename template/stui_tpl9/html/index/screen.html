@@ -1,0 +1,16 @@
+<div class="stui-pannel stui-pannel-bg hidden-sm hidden-xs clearfix">
+	<div class="stui-pannel-box">
+		<ul class="stui-index__screen col-pd clearfix">
+			{maccms:type ids="1,2,3,4" order="asc" by="sort" id="vo1" key="key1"}
+			<li>
+				<a href="{:mac_url_type($vo1,[],'show')}"><b>{$vo1.type_name}</b></a>
+				{maccms:foreach name=":explode(',',$vo1.type_extend.class)"}
+				{if condition="$key lt 8"}
+		       	<a href="{:mac_url_type($vo1,['class'=>$vo],'show')}">{$vo}</a>
+		       	{/if}
+		        {/maccms:foreach}
+			</li>		
+			{/maccms:type}			
+		</ul>
+	</div>
+</div>

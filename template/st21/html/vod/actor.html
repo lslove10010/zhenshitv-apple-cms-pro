@@ -1,0 +1,28 @@
+{maccms:actor name="'.$obj['vod_actor'].'"}{/maccms:actor}
+<div class="myui-panel myui-panel-bg clearfix">
+	<div class="myui-panel-box clearfix">
+		<div class="myui-panel_hd">
+			<div class="myui-panel__head active bottom-line clearfix">
+				<h3 class="title">
+					影片主演
+				</h3>
+				<ul class="nav nav-tabs active">
+					{maccms:actor name="'.$obj['vod_actor'].'" num="8" order="desc" by="time" id="vo" key="key"}		
+					<li{if condition="$key eq 1"} class="active"{/if}><a href="#actor{$key}" data-toggle="tab" title="{$vo.actor_name}">{$vo.actor_name}</a></li>
+					{/maccms:actor}
+				</ul>
+			</div>
+		</div>
+		<div class="tab-content myui-panel_bd">
+			{maccms:actor name="'.$obj['vod_actor'].'" num="8" order="desc" by="time" id="vo" key="key"}
+			<ul id="actor{$key}" class="myui-vodlist__bd tab-pane fade in {if condition="$key eq 1"}active{/if} clearfix">
+				{maccms:vod num="6" actor="'.$vo['actor_name'].'" order="desc" by=rnd'"}	
+				<li class="col-lg- col-md-6 col-sm-6 col-xs-3">
+					{include file="block/vod_box_tab"}
+				</li>
+				{/maccms:vod}
+			</ul>
+			{/maccms:actor}
+		</div>
+	</div>						
+</div>

@@ -1,0 +1,36 @@
+<div class="myui-panel myui-panel-bg clearfix">
+	<div class="myui-panel-box clearfix">
+		<div class="myui-panel_hd">
+			<div class="myui-panel__head clearfix">
+				<h3 class="title">热播榜</h3>
+</div>																		
+		</div>
+		<div class="myui-panel_bd">
+			<ul class="myui-vodlist__media active col-pd clearfix">
+				{maccms:vod num="1" type="all" order="desc" by="hits" flag="vod"}
+			<li>
+	<div class="thumb">
+		<a class="myui-vodlist__thumb img-xs-70" style="background: url({:mac_url_img($vo.vod_pic)});" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.vod_pic)}"></a>
+	</div>
+	<div class="detail detail-side">
+		<h6 class="title"><a href="{:mac_url_vod_detail($vo)}"><i class="fa fa-angle-right text-muted pull-right"></i>{$vo.vod_name|mac_substring=10}</a></h6>
+		<p class="font-12"><span class="text-muted">状态：</span>{if condition="$vo.vod_remarks neq ''"}{$vo.vod_remarks|mac_substring=10}{elseif condition="$vo.vod_serial gt 0"}第{$vo.vod_serial}集{else /}已完结{/if}</p>
+		<p class="font-12"><span class="text-muted">类型：</span>{$vo.type.type_name}&nbsp;&nbsp;<span class="text-muted">地区：</span>{$vo.vod_area}</p>
+		<p class="font-12"><span class="text-muted">年份：</span>{$vo.vod_year}</p>
+	</div>																										
+</li>	{/maccms:vod}
+							</ul>
+			<ul class="myui-vodlist__text col-pd clearfix">
+
+
+			{maccms:vod num="19" start="2" type="all" order="desc" by="hits" flag="vod"}
+	<li>
+	<a href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}">
+		<span class="badge badge-radius{if condition="$key eq 1"} badge-first{/if}{if condition="$key eq 2"} badge-second{/if}{if condition="$key eq 3"} badge-third{/if}">{$key+1}</span>{$vo.vod_name}</a>
+</li>
+
+{/maccms:vod}
+							</ul>	
+		</div>
+	</div>
+</div>

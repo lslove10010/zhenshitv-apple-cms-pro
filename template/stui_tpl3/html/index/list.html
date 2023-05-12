@@ -1,0 +1,73 @@
+{maccms:type ids="parent" order="asc" by="sort" id="vo1" key="key1" flag="vod"}	
+<div class="stui-pannel stui-pannel-bg clearfix">	
+	<div class="stui-pannel-box clearfix">
+		<div class="col-lg-wide-75 col-xs-1 padding-0">													
+			<div class="stui-pannel_hd">
+				<div class="stui-pannel__head clearfix">
+					<a class="more text-muted pull-right" href="{:mac_url_type($vo1,[],'show')}">更多 <i class="icon iconfont icon-more"></i></a>
+					<h3 class="title">
+						<img src="{$maccms.path}statics/icon/icon_{$vo1.type_id}.png"/>
+						<a href="{:mac_url_type($vo1,[],'show')}">{$vo1.type_name}</a>
+					</h3>
+					<ul class="nav nav-text pull-right hidden-sm hidden-xs">
+						{maccms:type parent="'.$vo1['type_id'].'" order="asc" by="sort" id="vo2" key="key2"}
+                        <li><a href="{:mac_url_type($vo2,[],'show')}" class="text-muted">{$vo2.type_name}</a> <span class="split-line"></span></li>
+                        {/maccms:type}
+					</ul>
+				</div>																		
+			</div>
+			<div class="stui-pannel_bd clearfix">
+				<ul class="stui-vodlist clearfix">
+					{maccms:vod num="12" type="'.$vo1['type_id'].'" order="desc" by="time"}
+					<li class="col-md-5 col-sm-4 col-xs-3 {if condition="$key gt 10"}hidden-lg hidden-md{/if}">
+						{include file="block/vod_box"}											
+					</li>
+					{/maccms:vod}
+				</ul>																							
+			</div>		
+		</div>	
+		<div class="col-lg-wide-25 hidden-md hidden-sm hidden-xs">												
+			<div class="stui-pannel_hd">
+				<div class="stui-pannel__head clearfix">
+					<h3 class="title">
+						<img src="{$maccms.path}statics/icon/icon_12.png"/>
+						热播榜
+					</h3>													
+				</div>																		
+			</div>
+			<div class="stui-pannel_bd">
+				<ul class="stui-vodlist__media active col-pd clearfix">
+					{maccms:vod num="1" paging="no" type="'.$vo1['type_id'].'" order="desc" by="hits"}
+					{include file="block/vod_box_media"}
+					{/maccms:vod}
+				</ul>
+				<ul class="stui-vodlist__rank col-pd clearfix">
+					{maccms:vod num="9" paging="no" type="'.$vo1['type_id'].'" order="desc" by="hits" start="2"}
+					{include file="block/vod_box_rank"}					
+					{/maccms:vod}
+				</ul>
+			</div>
+			<div class="stui-pannel_hd">
+				<div class="stui-pannel__head clearfix">				
+					<h3 class="title">
+						<img src="{$maccms.path}statics/icon/icon_25.png"/>
+						筛选
+					</h3>													
+				</div>																		
+			</div>
+			<div class="stui-pannel_bd col-pd">																									
+				<ul class="stui-vodlist__screen clearfix">
+					{maccms:foreach name=":explode(',',$vo1.type_extend.class)" id="vo2" key="key2"}
+                    <li {if condition="$key2 gt 11"}class="hide"{/if}><a href="{:mac_url_type($vo1,['class'=>$vo2],'show')}">{$vo2}</a></li>
+                    {/maccms:foreach}
+				</ul>
+				<ul class="stui-vodlist__screen top-line-dot clearfix">
+					{maccms:foreach name=":explode(',',$vo1.type_extend.year)" id="vo2" key="key2"}
+                    <li {if condition="$key2 gt 7"}class="hide"{/if}><a href="{:mac_url_type($vo1,['yeaer'=>$vo2],'show')}">{$vo2}</a></li>
+                    {/maccms:foreach}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{/maccms:type}

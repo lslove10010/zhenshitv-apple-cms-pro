@@ -1,0 +1,20 @@
+<div class="stui-player__item clearfix">
+	<div class="stui-player__video embed-responsive embed-responsive-16by9 clearfix">
+		{$player_data}{$player_js}							
+	</div>						
+	<div class="stui-player__detail detail">
+		<div class="setnumber">
+			<a class="btn btn-default" href="{$obj.player_info.link_pre}"><i class="iconfont icon-back"></i> 上一集</a>
+			<a class="btn btn-default" href="{$obj.player_info.link_next}">下一集 <i class="iconfont icon-more"></i></a>
+		</div>
+		<h4 class="title">{$obj.vod_name}</h4>
+		<p class="data margin-0">
+			<span class="text-muted">类型：</span>{$obj.vod_class}
+			<span class="split-line"></span>
+			<span class="text-muted">地区：</span>{$obj.vod_area}
+			<span class="split-line"></span>
+			<span class="text-muted">年份：</span>{$obj.vod_year}
+		</p>											
+	</div>
+</div>
+

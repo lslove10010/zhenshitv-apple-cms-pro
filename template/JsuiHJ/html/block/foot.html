@@ -1,0 +1,71 @@
+
+<div class="headernav app-footnav visible-xs visible-sm" id="footernav" style="position: fixed;bottom: 0;left:0;  z-index: 9999">
+  <div class="nav-wrap">
+    <div id="footer-nav" class="wrap">
+      <div class="app-wrapper clearfix footer-nav-app-wrapper">
+        <div id="footer-nav-index" class="app-slide active"> <a href="{$maccms.path}"> <img class="app-img normal" src="{$maccms.path_tpl}images/menu/home-s1.png" /> <img class="app-img active" src="{$maccms.path_tpl}images/menu/home-focus.png" /> </a> </div>
+        <div id="footer-nav-drama" class="app-slide "> <a href="{:mac_url('/vod/type/id/2')}"> <img class="app-img normal" src="{$maccms.path_tpl}images/menu/drama-s1.png" /> <img class="app-img active" src="{$maccms.path_tpl}images/menu/drama-focus.png" /> </a> </div>
+        <div id="footer-nav-search" class="app-slide "> <a href="javascript:;" onclick="openSearch()"> <img class="app-img normal" id="" src="{$maccms.path_tpl}images/menu/btn_search_normal-test.png" /> </a> </div>
+        <div id="footer-nav-recommend" class="app-slide "> <a href="{:mac_url('/vod/type/id/1')}"> <img class="app-img normal" src="{$maccms.path_tpl}images/menu/recommend-s1.png" /> <img class="app-img active" src="{$maccms.path_tpl}images/menu/recommend-focus.png" /> </a> </div>
+        <div id="footer-nav-more" class="app-slide " id="clickmore">
+        <a href="javascript:;" id="clickmore"> <img class="app-img normal" src="{$maccms.path_tpl}images/menu/more-s1.png" /> <img class="app-img active" src="{$maccms.path_tpl}images/menu/more-focus.png" /> </a> </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="app-menu" id="appmenu" style="display:none">
+  <div class="app-menu-tab">
+    <div style="text-align: center;"> <img class="popup-head-text" src="{$maccms.path_tpl}images/more-text.png" alt=""> </div>
+    <div class="app-menu-item-wrapper">
+      <div class="app-menu-item app-menu-item-left" id="vod_rank_nav_m"> <a href="{:mac_url('label/top')}"> <img src="{$maccms.path_tpl}images/icons/rank_402x.png" /> </a> </div>
+      <div class="app-menu-item app-menu-item-mid" id="vod_history_nav_m"> <a href="{:mac_url('art/index')}"> <img src="{$maccms.path_tpl}images/icons/history_402x.png" /> </a> </div>
+      <div class="hot app-menu-item app-menu-item-right"> <a href="{:mac_url('gbook/index')}" target="_blank"> <img src="{$maccms.path_tpl}images/icons/discuz_402x.png" /> </a> </div>
+    </div>
+	<div class="app-menu-item-wrapper">
+      <div class="app-menu-item app-menu-item-left" id="vod_rank_nav_m"> <a href="{:mac_url('/vod/type/id/1')}"> <img src="{$maccms.path_tpl}images/icons/krtv_402x.png" /> </a> </div>
+      <div class="app-menu-item app-menu-item-mid" id="vod_history_nav_m"> <a href="{:mac_url('/vod/type/id/2')}"> <img src="{$maccms.path_tpl}images/icons/movie_402x.png" /> </a> </div>
+      <div class="hot app-menu-item app-menu-item-right"> <a href="{:mac_url('/vod/type/id/3')}" target="_blank"> <img src="{$maccms.path_tpl}images/icons/enttv_402x.png" /> </a> </div>
+    </div>
+    <div class="popup-close-btn-div"> <a class="popup-close-btn-a" href="javascript:;"> <img class="popup-close-btn" src="{$maccms.path_tpl}images/close-btn.png" alt=""> </a> </div>
+  </div>
+</div>
+<div class="row"> <br>
+  <div class="box-footer clearfix">
+    <div class="container">
+      <p class="link"> <a href="mailto:{$maccms.site_email}">广告合作</a>{maccms:link by="sort" order="asc" num="100"}<span class="sep">-</span> <a href="{$vo.link_url}" target="_blank">{$vo.link_name}</a>{/maccms:link}</p>
+      <p class="m-0 text-muted">
+      <p>本网站内容收集于互联网上公开资源，提供最棒的web页面服务，但不提供也不参与影片档案录制、下载、上传、储存。</br>
+        本站永久免费共享、无需安装任何插件、免注册登入、无隐藏恶意（挖矿）软体，欢迎韩剧迷安心浏览观赏。</br>
+      </p>
+      <p>2016-{:date(Y)}<b style="font:Verdana, Arial, Helvetica, sans-serif"> <a href="{$maccms.path}"> <font color="ff443f">{$maccms.site_name}</font></a></b></p>
+      </br>
+      </p>
+    </div>
+  </div>
+</div>
+<ul class="slider-extra clearfix">
+  <li><a class="backtop" href="javascript:scroll(0,0)" style="display: none;"><i class="icon iconfont">&#xe900;</i></a></li>
+  <li class="visible-xs hidden-xs"><a class="open-share" href="javascript:;"><i class="icon iconfont icon-share">&#xe62d;</i></a></li>
+</ul>
+<script>
+$("#clickmore").on('click',function(){
+  $('#appmenu').css('display','block');
+  $('#footer-nav-more').addClass('active');
+});
+
+$('.user_playlog').show();
+function openSearch() {
+  if ( $('.user-search').is(':visible') ) {
+    $(".user-search").hide();
+    $("body").unbind("touchmove");
+  } else {
+    $(".user-search").show();
+    $(".zanpian_wd").focus();
+    $("body").on('touchmove', function(event) { event.preventDefault(); });
+  }
+}
+$('.popup-close-btn-a').on('click',function(){
+  $('#appmenu').css('display','none');
+  $('#footer-nav-more').removeClass('active');
+});
+</script>

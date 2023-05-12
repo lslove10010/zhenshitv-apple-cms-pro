@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>{if !empty($maccms.seo.vod.name)}{$maccms.seo.vod.name}{else/}{$maccms.site_name}{/if}</title>
+<meta name="keywords" content="{if !empty($maccms.seo.vod.key)}{$maccms.seo.vod.key}{else/}{$maccms.site_keywords}{/if}">
+<meta name="description" content="{if !empty($maccms.seo.vod.des)}{$maccms.seo.vod.des}{else/}{$maccms.site_description}{/if}">
+{include file="block/include"}
+</head>
+<body>
+{include file="block/head"}
+<ul id="lightSlider" class="hidden-xs">
+  {maccms:vod level="9" num="5" by="time" order="desc"}
+  <li> <a href="{$vo|mac_url_vod_detail}"><img class="blue-slide hide-first" src="{$vo.vod_pic_slide|mac_url_img}" alt="{$vo.vod_name}"></a> </li>
+  {/maccms:vod}
+</ul>
+<script type="text/javascript">
+  $(document).ready(function() {
+        reshowimg();
+        slider = $("#lightSlider").lightSlider({
+          item:1,
+          addClass: 'hidden-xs blue-slide-black',
+          speed: 800, //ms'
+          easing: 'linear',
+          controls: false,
+          pager:true,
+          // mode: "slide",
+          mode: "fade",
+          pause: 5000,
+          useCSS: true,
+          loop: true,
+        });
+        setTimeout(function(){
+          slider.play();
+        }, 3000);
+
+  });
+
+  function reshowimg() {
+    $(".hide-first").show();
+  }
+
+</script>
+<div class="container">
+  <div class="row">
+    <div class="layout-box clearfix visible-xs">
+      <div class="visible-xs">
+        <div class="swiper-container box-slide">
+          <div class="swiper-wrapper"> 
+						{maccms:vod level="9" num="5" by="time" order="desc"}
+            <div class="swiper-slide">
+              <div class="box-video-slide"> <a class="slide-pic swiper-lazy" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}" data-background="{$vo.vod_pic_slide|mac_url_img}" style="padding-top:60%;background-position:50% 50%;background-size:cover;"><span class="slide-title">{$vo.vod_name}</span>
+                <div class="swiper-lazy-preloader"></div>
+                </a> </div>
+            </div>
+            {/maccms:vod} 
+					</div>
+          <div class="swiper-button-next hidden-xs"><span class="glyphicon glyphicon-chevron-right"></span></div>
+          <div class="swiper-button-prev hidden-xs"><span class="glyphicon glyphicon-chevron-left"></span></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </div>
+    {maccms:type ids="parent" flag="vod" num="10" by="sort" order="asc" id="type" key="key_type"}
+    <div class="layout-box clearfix hidden-xs">
+      <div class="box-title">
+        <h3 class="m-0"><i class="icon iconfont text-color">{if $type.type_id==1}&#xe67a;{elseif $type.type_id==2/}&#xe6bc;{elseif $type.type_id==3/}&#xe615;{elseif $type.type_id==4/}&#xe677;{else/}&#xe719;{/if}</i>热门{$type.type_name}</h3>
+        <div class="more pull-right"><a href="{$type|mac_url_type}" class="text-muted" title="更多">更多 <i class="icon iconfont">&#xe65e;</i></a></div>
+        {if !empty($type.childids)}
+        <div class="box-title-nav">
+          <ul class="clearfix">
+            {maccms:type ids="child" parent="'.$type['type_id'].'" num="10" by="sort" order="asc"}
+            <li {if $key gt 6} class="hidden-sm hidden-xs"{/if}><a class="text-overflow" href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+            {/maccms:type}
+          </ul>
+        </div>
+        {/if} </div>
+      <ul class="col-md-8 col-sm-12 col-xs-12 p-0 clearfix">
+        {maccms:vod num="24" type="'.$type['type_id'].'" by="hits_week" order="desc"}
+        {include file="block/item"}
+        {/maccms:vod}
+      </ul>
+      <div class="box-video-footer visible-xs clearfix"><a href="{$type|mac_url_type}" class="text-more" title="查看更多">查看更多 <i class="icon iconfont icon-right pull-right"></i></a></div>
+    </div>
+    <div class="layout-box clearfix visible-xs">
+      <div class="box-title">
+        <h3 class="m-0">热门{$type.type_name}</h3>
+        <div class="more pull-right"><a href="{$type|mac_url_type}" class="text-muted" title="更多">更多 <i class="icon iconfont">&#xe65e;</i></a></div>
+        {if !empty($type.childids)}
+        <div class="box-title-nav">
+          <ul class="clearfix">
+            {maccms:type ids="child" parent="'.$type['type_id'].'" num="10" by="sort" order="asc"}
+            <li {if $key gt 6} class="hidden-sm hidden-xs"{/if}><a class="text-overflow" href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+            {/maccms:type}
+          </ul>
+        </div>
+        {/if} </div>
+      <div class="swiper-container vod-swiper-7" style="display:none;">
+        <ul class="swiper-wrapper">
+          {maccms:vod num="24" type="'.$type['type_id'].'" by="hits_week" order="desc"}
+          {include file="block/item_slide"}
+          {/maccms:vod}
+        </ul>
+        <div class="swiper-button-next"><i class="icon iconfont icon-right"></i></div>
+        <div class="swiper-button-prev"><i class="icon iconfont icon-left"></i></div>
+      </div>
+    </div>
+    {/maccms:type}
+    <div class="layout-box clearfix">
+      <div class="box-title">
+        <h3 class="m-0"><i class="icon iconfont text-color">&#xe626;</i>新闻资讯</h3>
+        <div class="more pull-right"><a href="{:mac_url('art/index')}" class="text-muted" title="更多">更多 <i class="icon iconfont">&#xe65e;</i></a></div>
+        <div class="box-title-nav">
+          <ul class="clearfix">
+            {maccms:type ids="parent" flag="art" num="10" by="sort" order="asc"}
+            <li {if $key gt 6} class="hidden-sm hidden-xs"{/if}><a class="text-overflow" href="{$vo|mac_url_type}">{$vo.type_name}</a></li>
+            {/maccms:type}
+          </ul>
+        </div>
+      </div>
+      <div class="box-topic-list clearfix">
+        <ul class="item">
+          {maccms:art num="18" by="time" orderf="desc"}
+					{include file="block/item_art"}
+          {/maccms:art}
+        </ul>
+        <div class="box-video-footer visible-xs clearfix"><a href="{:mac_url('art/index')}" class="text-more" title="查看更多">查看更多 <i class="icon iconfont icon-right pull-right"></i></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+{include file="block/foot"}
+<script>
+$(document).ready(function(){
+  var bannerH = $(".navbar-inverse").height();
+  $(window).scroll(function(){
+    var scrollTop=$(this).scrollTop();
+    if(scrollTop >= (bannerH+300) ){
+      $(".navbar-inverse").addClass("navbar-beta").removeClass("navbar-alpha");
+      $('.navbar-inverse .navbar-nav > li > a').each(function(){
+        var _this = $(this);
+        _this.addClass( "black-font" ).removeClass("white-font");
+      });
+      $('.scroll-effect').removeClass('search-box-on-top');
+    }else{
+      $(".navbar-inverse").addClass("navbar-alpha").removeClass("navbar-beta");
+      $('.navbar-inverse .navbar-nav > li > a').each(function(){
+        var _this = $(this);
+        _this.addClass( "white-font" ).removeClass("black-font");
+      });
+      $('.scroll-effect').addClass('search-box-on-top');
+    }
+    })
+});
+</script>
+</body>
+</html>

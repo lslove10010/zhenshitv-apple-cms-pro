@@ -1,0 +1,38 @@
+<div class="myui-panel myui-panel-bg clearfix">
+	<div class="myui-panel-box clearfix">
+		<div class="myui-panel_hd">
+			<div class="myui-panel__head clearfix">
+				<h3 class="title">荧屏巨星</h3>	
+				<!--<a class="more text-muted" href="/actor">更多 <i class="fa fa-angle-right"></i></a></div>-->
+		</div>
+		<div class="myui-panel_bd">
+			<ul class="myui-vodlist__bd clearfix">
+				      {maccms:actor num="9"  order="desc" by="time"}
+				<li class="col-lg-10 col-md-10 col-sm-5 col-xs-3">
+				<div class="myui-vodlist__box">
+			<a class="myui-vodlist__thumb actor lazyload" href="{$vo|mac_url_actor_detail}" title="{$vo.actor_name}" data-original="{$vo.actor_pic|mac_url_img}"><span class="pic-text text-right">
+		演员</span>
+	</a>									
+	<div class="myui-vodlist__detail">
+		<h4 class="title text-overflow text-center"><a href="{$vo|mac_url_actor_detail}" title="{$vo.actor_name}">{$vo.actor_name}</a></h4>
+	</div>										
+</div>
+				</li>
+					     {/maccms:actor}
+				      {maccms:actor start="10" num="1"  order="desc" by="time"}
+				<li class="col-lg-10 col-md-10 col-sm-5 col-xs-3 hidden-xs">
+				<div class="myui-vodlist__box">
+			<a class="myui-vodlist__thumb actor lazyload" href="{$vo|mac_url_actor_detail}" title="{$vo.actor_name}" data-original="{$vo.actor_pic|mac_url_img}"><span class="pic-text text-right">
+		演员</span>
+	</a>									
+	<div class="myui-vodlist__detail">
+		<h4 class="title text-overflow text-center"><a href="{$vo|mac_url_actor_detail}" title="{$vo.actor_name}">{$vo.actor_name}</a></h4>
+	</div>										
+</div>
+				</li>
+					     {/maccms:actor}
+							</ul>
+		</div>	
+		
+	</div>						
+</div>

@@ -1,0 +1,51 @@
+﻿
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<title>热门韩国电影电视剧综艺排行榜  - {$maccms.site_name}</title>
+<meta name="keywords" content="韩剧排行榜,电影排行榜,综艺排行大全">
+<meta name="description" content="韩剧网为您提供韩国电视剧电影综艺热门TOP100排行榜">
+{include file="block/include"}
+{php}
+	$label_page='top';
+	$label_top=0;
+{/php}
+</head>
+<body>
+{include file="block/head"}
+<div class="container">
+  <div class="row">
+    <div class="layout-box clearfix">
+      <div class="box-title-nav">
+        <ul class="clearfix">
+          <li><a class="text-overflow {if $label_top==0} active{/if}" href="{:mac_url('label/top')}">全部榜单</a></li>
+					{maccms:type ids="parent" flag="vod" num="20" by="sort" order="asc"}
+          <li><a class="text-overflow {if $label_top==$vo.type_id} active{/if}" href="{:mac_url('label/top_100')}?top_type={$vo.type_id}">{$vo.type_name}排行</a></li>
+					{/maccms:type}
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 p-0">
+      <div class="layout-box clearfix">
+				{maccms:type ids="parent" flag="vod" num="3" by="sort" order="asc" id="type" key="key_type"}
+        <div class="col-md-4 col-sm-12 col-xs-12 active">
+          <div class="box-title pg-0">
+            <h3 class="m-0"><i class="icon iconfont text-color">&#xe66e;</i>{$type.type_name}</h3>
+            <div class="more pull-right"><a href="{$type|mac_url_type}" class="text-muted" title="更多">更多 <i class="icon iconfont">&#xe65e;</i></a></div>
+          </div>
+          <div class="box-video-text-list">
+            <ul class="clearfix p-0 m-0">
+							{maccms:vod num="30" type="'.$type['type_id'].'" by="hits" order="desc"}
+              <li class="list p-0"><a class="pull-left" href="{$vo|mac_url_vod_detail}" title="{$vo.vod_name}"><em class="num {if $key lt 4} active{/if}">{$key}</em>{$vo.vod_name}</a><span class="hits text-color">{$vo.vod_hits}</span> </li>
+							{/maccms:vod}
+            </ul>
+          </div>
+        </div>
+				{/maccms:type}
+      </div>
+    </div>
+  </div>
+</div>
+{include file="block/foot"}
+</body>
+</html>

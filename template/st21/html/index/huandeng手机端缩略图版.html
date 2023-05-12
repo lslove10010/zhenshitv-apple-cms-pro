@@ -1,0 +1,21 @@
+<div class="myui-panel radius-0 padding-0 clearfix">
+	<div id="home_slide" class="carousel slide clearfix" data-ride="carousel">
+		<div class="carousel-inner">
+			{maccms:vod num="10" type="all" order="desc" by="time" level="5"}
+			<div class="item text-center {if condition="$key-1 eq 0"}active{/if}" style="background-color: ;">
+				<a title="{$vo.vod_name}" href="{:mac_url_vod_detail($vo)}">
+					<img class="img-responsive hidden-xs" src="{$vo.vod_pic_slide|mac_url_img}"/>
+					<img class="img-responsive visible-xs" src="{$vo.vod_pic_thumb|mac_url_img}"/>
+				</a>
+			</div>
+			{/maccms:vod}
+		</div> 
+		<ul class="carousel-indicators carousel-indicators-dots hidden-sm hidden-xs">
+			{maccms:vod num="10" type="all" order="desc" by="time" level="5"}
+			<li data-target="#home_slide" data-home_slide-to="{$key-1}" class="{if condition="$key-1 eq 0"}active{/if}"></li>
+			{/maccms:vod}
+		</ul>
+		<a class="carousel-control left" href="#home_slide" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+		<a class="carousel-control right" href="#home_slide" data-slide="next"><i class="fa fa-angle-right"></i></a>
+	</div>
+</div>

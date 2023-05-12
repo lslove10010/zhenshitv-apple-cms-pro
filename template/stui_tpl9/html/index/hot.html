@@ -1,0 +1,37 @@
+<div class="stui-pannel stui-pannel-bg clearfix">
+	<div class="stui-pannel-box">
+		<div class="stui-pannel_hd">
+			<div class="stui-pannel__head active bottom-line clearfix">
+				<h3 class="title">
+					<img src="{$maccms.path}statics/icon/icon_12.png"/>
+					最近热播
+				</h3>						
+				<ul class="nav nav-tabs pull-right">
+					{maccms:type ids="1,2,3,4" order="asc" by="sort" id="vo1" key="key1"}
+					<li {if condition="$vo1.type_id eq 1"}class="active"{/if}><a href="#home{$vo1.type_id}" data-toggle="tab">{$vo1.type_name}</a></li>
+					{/maccms:type}								
+				</ul>
+			</div>																		
+		</div>
+		<div class="tab-content stui-pannel_bd">
+			{maccms:type ids="1,2,3,4" order="asc" by="sort" id="vo1" key="key1"}
+			<ul id="home{$vo1.type_id}" class="stui-vodlist tab-pane fade in {if condition="$vo1.type_id eq 1"}active{/if} clearfix">
+				{maccms:vod num="13" type="'.$vo1['type_id'].'" order="desc" by="hits"}
+				<li class="{if condition="$key eq 1"}col-md-4{else /}col-md-8{/if} col-sm-4 col-xs-3 {if condition="$key gt 12"}hidden-sm hidden-xs{/if}">
+					<div class="stui-vodlist__box">
+						<a class="stui-vodlist__thumb lazyload" href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}" data-original="{:mac_url_img($vo.vod_pic)}">						
+							<span class="play hidden-xs"></span>	
+							<span class="pic-text text-right">{if condition="$vo.vod_remarks neq ''"}{$vo.vod_remarks}{elseif condition="$vo.vod_serial gt 0"}第{$vo.vod_serial}集{else /}已完结{/if}</span>
+						</a>									
+						<div class="stui-vodlist__detail">
+							<h4 class="title text-overflow"><a href="{:mac_url_vod_detail($vo)}" title="{$vo.vod_name}">{$vo.vod_name}</a></h4>
+							{if condition="$key eq 1"}<p class="text text-overflow text-muted hidden-xs">{$vo.vod_actor|mac_default='内详'}</p>{/if}
+						</div>												
+					</div>													
+				</li>
+				{/maccms:vod}
+			</ul>												
+			{/maccms:type}
+		</div>
+	</div>
+</div>	
