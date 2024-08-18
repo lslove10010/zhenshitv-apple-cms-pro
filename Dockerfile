@@ -14,10 +14,10 @@ RUN docker-php-ext-install mysqli pdo_mysql zip
 RUN a2enmod rewrite
 
 # 添加ServerName指令
-RUN echo "ServerName localhost:7890" >> /etc/apache2/apache2.conf
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # 修改Apache的监听端口为8080
-RUN sed -i 's/80/7890/g' /etc/apache2/ports.conf
+# RUN sed -i 's/80/7890/g' /etc/apache2/ports.conf
 
 # 将项目文件复制到工作目录
 COPY . /var/www/html
@@ -30,6 +30,6 @@ RUN mkdir -p /var/www/html/upload && chown -R www-data:www-data /var/www/html/up
 RUN chown -R www-data:www-data /var/www/html
 
 # 暴露端口
-EXPOSE 7890
+EXPOSE 80
 USER 10001
 CMD ["apache2-foreground"]
