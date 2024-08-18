@@ -14,7 +14,7 @@ RUN docker-php-ext-install mysqli pdo_mysql zip
 RUN a2enmod rewrite
 
 # 添加ServerName指令
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN echo "ServerName localhost:8080" >> /etc/apache2/apache2.conf
 
 # 将项目文件复制到工作目录
 COPY . /var/www/html
