@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 RUN a2enmod rewrite
 
 # 设置Apache虚拟主机配置
-RUN echo "<VirtualHost *:8080> \
+RUN echo "<VirtualHost *:7890> \
     DocumentRoot /var/www/html \
     ServerName localhost \
     <Directory /var/www/html> \
@@ -37,6 +37,6 @@ RUN mkdir -p /var/www/html/upload && chown -R www-data:www-data /var/www/html/up
 RUN chown -R www-data:www-data /var/www/html
 
 # 暴露端口
-EXPOSE 8080
+EXPOSE 7890
 USER 10001
 CMD ["apache2-foreground"]
