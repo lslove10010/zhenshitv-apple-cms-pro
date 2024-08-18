@@ -28,3 +28,4 @@ RUN chown -R www-data:www-data /var/www/html
 
 # 暴露端口
 EXPOSE 80
+USER 10001
