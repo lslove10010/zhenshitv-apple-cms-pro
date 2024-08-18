@@ -16,6 +16,9 @@ RUN a2enmod rewrite
 # 添加ServerName指令
 RUN echo "ServerName localhost:8080" >> /etc/apache2/apache2.conf
 
+# 修改Apache的监听端口为8080
+RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf
+
 # 将项目文件复制到工作目录
 COPY . /var/www/html
 
