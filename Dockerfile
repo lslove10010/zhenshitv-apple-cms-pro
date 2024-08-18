@@ -10,7 +10,10 @@ RUN apt-get update && apt-get install -y libfreetype6-dev libjpeg62-turbo-dev li
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 # 安装必要的PHP扩展和工具
+RUN -v /tmp:/var/run/apache2 -p 8080:8080 -d php:7.4-apache
+
 RUN docker-php-ext-install mysqli pdo_mysql zip
+
 RUN a2enmod rewrite
 
 # 添加ServerName指令
