@@ -27,5 +27,5 @@ RUN mkdir -p /var/www/html/upload && chown -R www-data:www-data /var/www/html/up
 RUN chown -R www-data:www-data /var/www/html
 
 # 暴露端口
-EXPOSE 80
+EXPOSE 8080
 USER 10001
